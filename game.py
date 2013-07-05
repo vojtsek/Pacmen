@@ -27,6 +27,7 @@ class Maze():
         self.ports = [[[0,0] for x in range(2)] for x in range(10)]
         #seznam pozic monster
         self.positions = list()
+        self.pac_positions = list()
         #počet tabletek k jídlu
         self.feeds = 0
         #inicializace bludiště
@@ -60,6 +61,8 @@ class Maze():
                     #pozice pro monstra
                    if(self.maze_map[i][j] == '^'):
                         self.positions.append([i,j])
+                   if(self.maze_map[i][j] == 'P'):
+                        self.pac_positions.append([i,j])
                     #pozice s tabletkou
                    if self.maze_map[i][j] == '_':
                         self.feeds += 1
@@ -292,12 +295,12 @@ class Game():
             screen.blit(arrows,(5,70))
         if count > 1:
             label = label_font.render(self.static_list[1], 1, yellow)
-            screen.blit(label, (5,640))
-            screen.blit(wasd,(5,570))
+            screen.blit(label, (950,140))
+            screen.blit(wasd,(950,70))
         if count > 2:
             label = label_font.render(self.static_list[2], 1, yellow)
-            screen.blit(label, (950,140))
-            screen.blit(ijkl,(950,70))
+            screen.blit(label, (5,640))
+            screen.blit(ijkl,(5,570))
         if count > 3:
             label = label_font.render(self.static_list[3], 1, yellow)
             screen.blit(label, (950,640))

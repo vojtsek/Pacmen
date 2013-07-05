@@ -114,6 +114,7 @@ class Movable(pygame.sprite.Sprite):
         if(self.y >= self.game.maze.height) or (self.x >= self.game.maze.width)  or (self.x < 0) or (self.y < 0):
             return False
         if self.game.maze.maze_map[self.y + (self.direction[1])][self.x + (self.direction[0])] != '*':
+
             return True
         else:
             return False
@@ -298,7 +299,7 @@ class Movable(pygame.sprite.Sprite):
                     self.ring = False
             self.moving = False
             #posunutí, aktualizace celkové změny
-            if self.isAbleToMove():
+            if (self.isAbleToMove()) and (self.direction != [0,0]):
                 self.moving = True
                 self.position[0] += self.direction[0] * self.speed
                 self.position[1] += self.direction[1] * self.speed

@@ -173,28 +173,32 @@ def start(player_count):
     game.setMazeNo(maze_no)
     # v závislosti na počtu hráčů vytvoří objekty třídy Pac a vloží je do pomocných seznamů
     if player_count > 0:
-        pac1 = Pac([-1,0],1,ImageStorage(['pac1_up.png','pac2_up.png','pac3_up.png'],['pac1_right.png','pac2_right.png','pac3_right.png'],['pac1_down.png','pac2_down.png','pac3_down.png'],['pac1_left.png','pac2_left.png','pac3_left.png'],),delta_pac,player_names[0],game.compute_position([1,1]),game,1,1,speed_pac)
+        pac_pos = game.maze.pac_positions[0]
+        pac1 = Pac([0,0],1,ImageStorage(['pac1_up.png','pac2_up.png','pac3_up.png'],['pac1_right.png','pac2_right.png','pac3_right.png'],['pac1_down.png','pac2_down.png','pac3_down.png'],['pac1_left.png','pac2_left.png','pac3_left.png'],),delta_pac,player_names[0],game.compute_position(pac_pos),game,pac_pos[1],pac_pos[0],speed_pac)
         movable_list.add(pac1)
         game.pac_list.append(pac1)
         result_list.append(pac1)
         game.static_list[0] = pac1.name
 
     if player_count > 1:
-        pac2 = Pac([-1,0],1,ImageStorage(['pac1_up.png','pac2_up.png','pac3_up.png'],['pac1_right.png','pac2_right.png','pac3_right.png'],['pac1_down.png','pac2_down.png','pac3_down.png'],['pac1_left.png','pac2_left.png','pac3_left.png'],),delta_pac,player_names[1],game.compute_position([58,1]),game,1,58,speed_pac)
+        pac_pos = game.maze.pac_positions[1]
+        pac2 = Pac([0,0],3,ImageStorage(['pac1_up.png','pac2_up.png','pac3_up.png'],['pac1_right.png','pac2_right.png','pac3_right.png'],['pac1_down.png','pac2_down.png','pac3_down.png'],['pac1_left.png','pac2_left.png','pac3_left.png'],),delta_pac,player_names[1],game.compute_position(pac_pos),game,pac_pos[1],pac_pos[0],speed_pac)
         movable_list.add(pac2)
         result_list.append(pac2)
         game.pac_list.append(pac2)
         game.static_list[1] = pac2.name
 
     if player_count > 2:
-        pac3 = Pac([1,0],3,ImageStorage(['pac1_up.png','pac2_up.png','pac3_up.png'],['pac1_right.png','pac2_right.png','pac3_right.png'],['pac1_down.png','pac2_down.png','pac3_down.png'],['pac1_left.png','pac2_left.png','pac3_left.png'],),delta_pac,player_names[2],game.compute_position([1,78]),game,78,1,speed_pac)
+        pac_pos = game.maze.pac_positions[2]
+        pac3 = Pac([0,0],1,ImageStorage(['pac1_up.png','pac2_up.png','pac3_up.png'],['pac1_right.png','pac2_right.png','pac3_right.png'],['pac1_down.png','pac2_down.png','pac3_down.png'],['pac1_left.png','pac2_left.png','pac3_left.png'],),delta_pac,player_names[2],game.compute_position(pac_pos),game,pac_pos[1],pac_pos[0],speed_pac)
         movable_list.add(pac3)
         game.pac_list.append(pac3)
         result_list.append(pac3)
         game.static_list[2] = pac3.name
 
     if player_count > 3:
-        pac4 = Pac([1,0],3,ImageStorage(['pac1_up.png','pac2_up.png','pac3_up.png'],['pac1_right.png','pac2_right.png','pac3_right.png'],['pac1_down.png','pac2_down.png','pac3_down.png'],['pac1_left.png','pac2_left.png','pac3_left.png'],),delta_pac,player_names[3],game.compute_position([58,78]),game,78,58,speed_pac)
+        pac_pos = game.maze.pac_positions[3]
+        pac4 = Pac([0,0],3,ImageStorage(['pac1_up.png','pac2_up.png','pac3_up.png'],['pac1_right.png','pac2_right.png','pac3_right.png'],['pac1_down.png','pac2_down.png','pac3_down.png'],['pac1_left.png','pac2_left.png','pac3_left.png'],),delta_pac,player_names[3],game.compute_position(pac_pos),game,pac_pos[1],pac_pos[0],speed_pac)
         movable_list.add(pac4)
         game.pac_list.append(pac4)
         result_list.append(pac4)
@@ -221,7 +225,7 @@ def start(player_count):
                 p = random.randrange(len(game.maze.positions))
                 p = game.maze.positions[p]
                 pos = game.compute_position(p)
-                if n % 2 == 1:
+                if n % 2 == 0:
                     chaser = True
                 else:
                     chaser = False
