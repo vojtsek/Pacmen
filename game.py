@@ -163,6 +163,7 @@ class Game():
     umožňuje vykreslení hrací plochy a menu, používá tříd Menu a Maze
     """
     def __init__(self):
+        self.result_list = list()
         #výchozí číslo bludiště
         self.maze_no = 1
         #barvy teleporů
@@ -270,12 +271,13 @@ class Game():
                 #vykreslení teleportů
                 elif (ord(self.maze.maze_map[i][j]) >= 49) and (ord(self.maze.maze_map[i][j]) <= 57):
                     pygame.draw.ellipse(screen,self.colors[int(self.maze.maze_map[i][j])],[x,y-6,10,18],1)
+                    pygame.draw.ellipse(screen,self.colors[int(self.maze.maze_map[i][j])],[x+2,y-4,6,14],1)
                 #vykreslení tabletek
                 elif self.maze.maze_map[i][j] == '_':
                     pygame.draw.circle(screen,pale,[x+5,y+5],1,1)
                 #pole ubírající body
                 elif self.maze.maze_map[i][j] == '-':
-                    pygame.draw.circle(screen,red,[x+5,y+5],2,1)
+                    pygame.draw.circle(screen,red,[x+5,y+5],3,1)
                 #tableta přecházející do režimu boss
                 elif self.maze.maze_map[i][j] == '/':
                     pygame.draw.circle(screen,yellow,[x+5,y+5],4,3)
@@ -315,7 +317,7 @@ class Game():
         #vykreslení stavu hry v pravé části okna - jména hráčů a dosažená skóre
         #hráči jsou vypsáni barvou, podle pořadí
         #v režimu boss je jejich jméno modré a je vidět zbývající čas
-        for pac in self.pac_list:
+        for pac in self.result_list:
             col = yellow
             label = pac.name
             if i == 0:

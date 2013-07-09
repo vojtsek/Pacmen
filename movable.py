@@ -162,7 +162,7 @@ class Movable(pygame.sprite.Sprite):
 
     def compute_distance(self,xy):
         """
-        spočítá vzdálenost z dalšího pole ve směru k cíli
+        spočítá vzdálenost (od dalšího pole ve směru objektu) k cíli
         """
         dist = math.sqrt(math.pow(abs(self.x + self.direction[0] - xy[0]),2) + math.pow(abs(self.y + self.direction[1] - xy[1]),2))
         return int(dist)

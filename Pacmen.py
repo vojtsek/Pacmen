@@ -19,14 +19,14 @@ def showText(screen):
     pomocná procedura, v případě skončení hry je nastavena proměnná show_menu
     a procedura vypíše informace o proběhnuté hře
     """
-    game.sort(result_list)
+    game.sort(game.result_list)
     label_font = pygame.font.SysFont(font_name, 110,True)
     label = label_font.render('Game over',1,(200,0,0))
     if show_menu:
         screen.blit(label,(160,150))
     score_font = pygame.font.SysFont('monospace', 20)
     y_delta = 0
-    for pac in result_list:
+    for pac in game.result_list:
         pac_score = score_font.render(pac.name + ': ' + str(pac.score),1,yellow)
         pac_monst = score_font.render('Monsters killed: ' + str(pac.monsters_killed),1,yellow)
         pac_play = score_font.render('Players killed: ' + str(pac.players_killed),1,yellow)
@@ -153,12 +153,11 @@ def start(player_count):
     """
     procedura inicializující hrací pole, viz dílčí komentáře
     """
-    global movable_list,game,pac1,pac2,pac3,pac4,pause,result_list,labels
+    global movable_list,game,pac1,pac2,pac3,pac4,pause,labels
     #pomocné seznamy
     #texty na obrazovku
     labels = list()
     #seznam pro závěrečné pořadí
-    result_list = list()
     #seznam pohybujících se objektů
     movable_list = pygame.sprite.Group()
     monsters_per_player = -1
@@ -177,14 +176,14 @@ def start(player_count):
         pac1 = Pac([0,0],1,ImageStorage(['pac1_up.png','pac2_up.png','pac3_up.png'],['pac1_right.png','pac2_right.png','pac3_right.png'],['pac1_down.png','pac2_down.png','pac3_down.png'],['pac1_left.png','pac2_left.png','pac3_left.png'],),delta_pac,player_names[0],game.compute_position(pac_pos),game,pac_pos[1],pac_pos[0],speed_pac)
         movable_list.add(pac1)
         game.pac_list.append(pac1)
-        result_list.append(pac1)
+        game.result_list.append(pac1)
         game.static_list[0] = pac1.name
 
     if player_count > 1:
         pac_pos = game.maze.pac_positions[1]
         pac2 = Pac([0,0],3,ImageStorage(['pac1_up.png','pac2_up.png','pac3_up.png'],['pac1_right.png','pac2_right.png','pac3_right.png'],['pac1_down.png','pac2_down.png','pac3_down.png'],['pac1_left.png','pac2_left.png','pac3_left.png'],),delta_pac,player_names[1],game.compute_position(pac_pos),game,pac_pos[1],pac_pos[0],speed_pac)
         movable_list.add(pac2)
-        result_list.append(pac2)
+        game.result_list.append(pac2)
         game.pac_list.append(pac2)
         game.static_list[1] = pac2.name
 
@@ -193,7 +192,7 @@ def start(player_count):
         pac3 = Pac([0,0],1,ImageStorage(['pac1_up.png','pac2_up.png','pac3_up.png'],['pac1_right.png','pac2_right.png','pac3_right.png'],['pac1_down.png','pac2_down.png','pac3_down.png'],['pac1_left.png','pac2_left.png','pac3_left.png'],),delta_pac,player_names[2],game.compute_position(pac_pos),game,pac_pos[1],pac_pos[0],speed_pac)
         movable_list.add(pac3)
         game.pac_list.append(pac3)
-        result_list.append(pac3)
+        game.result_list.append(pac3)
         game.static_list[2] = pac3.name
 
     if player_count > 3:
@@ -201,7 +200,7 @@ def start(player_count):
         pac4 = Pac([0,0],3,ImageStorage(['pac1_up.png','pac2_up.png','pac3_up.png'],['pac1_right.png','pac2_right.png','pac3_right.png'],['pac1_down.png','pac2_down.png','pac3_down.png'],['pac1_left.png','pac2_left.png','pac3_left.png'],),delta_pac,player_names[3],game.compute_position(pac_pos),game,pac_pos[1],pac_pos[0],speed_pac)
         movable_list.add(pac4)
         game.pac_list.append(pac4)
-        result_list.append(pac4)
+        game.result_list.append(pac4)
         game.static_list[3] = pac4.name
 
     #vytvoří seznam objektů třídy ImageStorage
@@ -470,17 +469,25 @@ while not game.done:
                         #kolize s monstrem
                         if not hit.player:
                             #hráč je v režimu "boss" - monstrum je resetováno na výchozí pozici, hráč si přičte 50 bodů
+                            #výjimkou je, je-li hráč v blízkosti některé z výchozích pozic pro monstra
                             if pac.boss > 0:
-                                p = random.randrange(len(game.maze.positions))
-                                p = game.maze.positions[p]
-                                pos = game.compute_position(p)
-                                eatghost.play()
-                                pac.score += 50
-                                labels.append(['50',[hit.position[0],hit.position[1]],80])
-                                hit.position = pos
-                                hit.x = p[1]
-                                hit.y = p[0]
-                                pac.monsters_killed += 1
+                                ok = True
+                                for pos in game.maze.positions:
+                                    if hit.compute_distance([pos[1],pos[0]]) < 5:
+                                        ok = False
+                                if ok:
+                                    p = random.randrange(len(game.maze.positions))
+                                    p = game.maze.positions[p]
+                                    pos = game.compute_position(p)
+                                    eatghost.play()
+                                    pac.score += 50
+                                    labels.append(['50',[hit.position[0],hit.position[1]],80])
+                                    hit.position = pos
+                                    hit.x = p[1]
+                                    hit.y = p[0]
+                                    hit.change_x = 0
+                                    hit.change_y = 0
+                                    pac.monsters_killed += 1
                             #je-li hráč v normálním režimu, je zabit
                             #odstranění hráče
                             # odstranění na něj zaměřených monster provede funkce die() třídy Pac
