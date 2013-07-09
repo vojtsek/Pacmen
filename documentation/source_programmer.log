@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.5.15)  6 JUL 2013 14:42
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.5.15)  7 JUL 2013 09:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**source_user.tex
-(./source_user.tex
+**source_programmer.tex
+(./source_programmer.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, lo
 aded.
@@ -380,8 +380,8 @@ Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
 \titlewidthlast=\dimen118
 \titlewidthfirst=\dimen119
 )
-(./source_user.aux)
-\openout1 = `source_user.aux'.
+(./source_programmer.aux)
+\openout1 = `source_programmer.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
 LaTeX Font Info:    ... okay on input line 12.
@@ -457,94 +457,51 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-<images/arrows.png, id=1, 180.675pt x 100.375pt>
-File: images/arrows.png Graphic file (type png)
- <use images/arrows.png>
-Package pdftex.def Info: images/arrows.png used on input line 35.
-(pdftex.def)             Requested size: 126.47162pt x 70.26201pt.
-LaTeX Font Info:    Try loading font information for U+msa on input line 39.
+Overfull \hbox (14.1814pt too wide) in paragraph at lines 26--27
+\T1/cmr/m/it/10 pygame \T1/cmr/m/n/10 k zo-brazení grafick-ých ob-jekt·. Obrázk
+y pouºité v pro-gramu jsou vytvo°eny
+ []
 
+LaTeX Font Info:    Try loading font information for U+msa on input line 32.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 39.
+LaTeX Font Info:    Try loading font information for U+msb on input line 32.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-)
-<images/port.png, id=3, 60.225pt x 35.13126pt>
-File: images/port.png Graphic file (type png)
- <use images/port.png>
-Package pdftex.def Info: images/port.png used on input line 45.
-(pdftex.def)             Requested size: 42.1572pt x 24.59169pt.
- [1
+) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./images/arrows.png> <./im
-ages/port.png>] <images/example.png, id=19, 60.225pt x 30.1125pt>
-File: images/example.png Graphic file (type png)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+Overfull \hbox (5.9143pt too wide) in paragraph at lines 49--50
+\T1/cmr/m/n/10 Kaºdý po-hy-bu-jící se ob-jekt de-tekuje p°í-chod na k°iºo-vatku
+ jako moºnost odbo£ení
+ []
 
-<use images/example.png>
-Package pdftex.def Info: images/example.png used on input line 52.
-(pdftex.def)             Requested size: 42.1572pt x 21.07858pt.
- <images/boss.png, id=20, 40.15pt x 35.13126pt>
-File: images/boss.png Graphic file (type png)
-
-<use images/boss.png>
-Package pdftex.def Info: images/boss.png used on input line 53.
-(pdftex.def)             Requested size: 28.1048pt x 24.59169pt.
- <images/boss_name.png, id=21, 180.675pt x 35.13126pt>
-File: images/boss_name.png Graphic file (type png)
-
-<use images/boss_name.png>
-Package pdftex.def Info: images/boss_name.png used on input line 54.
-(pdftex.def)             Requested size: 126.47162pt x 24.59169pt.
- <images/plus_50.png, id=22, 50.1875pt x 100.375pt>
-File: images/plus_50.png Graphic file (type png)
-
-<use images/plus_50.png>
-Package pdftex.def Info: images/plus_50.png used on input line 63.
-(pdftex.def)             Requested size: 35.131pt x 70.26201pt.
- <images/pac_death.png, id=23, 50.1875pt x 100.375pt>
-File: images/pac_death.png Graphic file (type png)
-
-<use images/pac_death.png>
-Package pdftex.def Info: images/pac_death.png used on input line 64.
-(pdftex.def)             Requested size: 35.131pt x 70.26201pt.
- <images/party.png, id=24, 60.225pt x 101.37875pt>
-File: images/party.png Graphic file (type png)
-
-<use images/party.png>
-Package pdftex.def Info: images/party.png used on input line 65.
-(pdftex.def)             Requested size: 42.1572pt x 70.96463pt.
- [2 <./images/example.png> <./images/boss.png> <./images/boss_name.png> <./imag
-es/plus_50.png> <./images/pac_death.png> <./images/party.png>] <images/monsters
-.png, id=34, 180.675pt x 100.375pt>
-File: images/monsters.png Graphic file (type png)
-
-<use images/monsters.png>
-Package pdftex.def Info: images/monsters.png used on input line 73.
-(pdftex.def)             Requested size: 126.47162pt x 70.26201pt.
- [3 <./images/monsters.png>] (./source_user.aux) ) 
+[3] (./source_programmer.aux) ) 
 Here is how much of TeX's memory you used:
- 3492 strings out of 495059
- 43406 string characters out of 3182030
- 102698 words of memory out of 3000000
- 6607 multiletter control sequences out of 15000+200000
- 12192 words of font info for 31 fonts, out of 3000000 for 9000
+ 3455 strings out of 495059
+ 42691 string characters out of 3182030
+ 103698 words of memory out of 3000000
+ 6579 multiletter control sequences out of 15000+200000
+ 13726 words of font info for 33 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 38i,5n,29p,1079b,174s stack positions out of 5000i,500n,10000p,200000b,50000s
- </home/vojcek/.texmf-var/fon
-ts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/vojcek/.texmf-var/fonts/pk/ljfo
-ur/jknappen/ec/ecbx1200.600pk> </home/vojcek/.texmf-var/fonts/pk/ljfour/jknappe
-n/ec/ecti1000.600pk> </home/vojcek/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1
-000.600pk> </home/vojcek/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk>
- </home/vojcek/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk> </home/vo
-jcek/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on source_user.pdf (3 pages, 92169 bytes).
+ 38i,4n,29p,989b,138s stack positions out of 5000i,500n,10000p,200000b,50000s
+ </home/vojcek/.texmf-var/fonts/pk/ljfour/jknapp
+en/ec/ecbx1000.600pk> </home/vojcek/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx
+1200.600pk> </home/vojcek/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk
+> </home/vojcek/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/v
+ojcek/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/vojcek/.tex
+mf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk> </home/vojcek/.texmf-var/fon
+ts/pk/ljfour/jknappen/ec/ecbx1728.600pk></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy10.pfb>
+Output written on source_programmer.pdf (3 pages, 116500 bytes).
 PDF statistics:
- 269 PDF objects out of 1000 (max. 8388607)
- 40 compressed objects within 1 object stream
+ 302 PDF objects out of 1000 (max. 8388607)
+ 48 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 46 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

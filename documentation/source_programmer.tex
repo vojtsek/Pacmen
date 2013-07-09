@@ -1,0 +1,53 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\author{Vojtěch Hudeček}
+\title{Pacmen program documentation}
+\begin{document}
+\begin{center}
+
+\begin{LARGE}
+\textbf{Zápočtový program - Pacmen }
+
+\textbf{Vojtěch Hudeček}
+
+\textbf{Letní semestr, ak. rok 2012/13}
+\linebreak 
+\chapter{Programátorská dokumentace}
+\end{LARGE}
+\end{center}
+\section{Úvod}
+Program je napsán v programovacím jazyce \textit{Python}. Využívá grafické kinhovny \textit{pygame} k zobrazení grafických objektů. Obrázky použité v programu jsou vytvořeny v programu GIMP. Hra je inspirována kultovní arkádou \textit{Pacman}, umožňuje ale zapojit do hry více hráčů. Hra byla vyvíjena v operačním systému \textit{Linux}.
+\section{Práce s daty}
+\subsection{Data v programu}
+Herní plán je reprezentován dvourozměrným polem typu char. Různé znaky reprezentují různé objekty v bludišti, záleží přesně na pozici znaku. Tato matice je načítána a ukládana pomocí třídy \textbf{Maze}. Informace o hře jsou uloženy v objektu třídy \textbf{Game} a v objektech třídy \textbf{Movable}. Třída Game obsahuje informace o akutálních objektech na scéně a instance tříd Maze a \textbf{Menu}. Třída Menu slouží pouze k práci s nabídkou.\\
+Každý pohybující se objekt je instancí třídy odvozené od Movable. Obsahuje informace o své pozici, aktuálním směru, stavu atd. Třída Movable navíc dědí od třídy \textbf{Sprite} z modulu \textit{pygame.sprite}, což umožňuje detekci kolizí. K aktuálnímu nastavení hry jsou použity globální proměnné. Vždy na začátku nové hry je vyvtořena nová instance třídy Game i seznamu pohybujícíh se objektů a python se postará o odstranění nevyužívaných objektů z paměti.
+\subsubsection{Vstup a výstup}
+Hra reaguje na události vyvolané stisky tlačítek na klávesnici. Jak ovládání tak nastavení si vystačí s klávesnicí. Výstup hry je pouze interaktivní zobrazení objektů na obrazovce. Načítání map probíhá pomocí textových souborů v adresáři maps. Program přečte soubory začínající $"map\_"$ a použije je jako podklady pro mapy bludišť. Každý soubor musí mít přesný formát. Na jednotlivých řádcích jsou postupně uvedeny šířka, výška, jméno písně uložené v adresáři music, barva zdí, barvy teleportů. Následuje řádek se znakem \textit{@} a za ním mapa. Mapa musí mít přesně danou výšku a šířku. Význam jednotlivých znaků a věci, které musí mapa splňovat, jsou uvedeny v uživatelské dokumentaci. Maximální rozměry šířka $\times$ výška  jsou 80 $\times$ 60 znaků.
+\section{Vnitřní struktura}
+\subsection{Grafika}
+Vykreslení bludiště a statických objektů zajištuje metoda \textbf{draw()} třídy Game. Pohybující se objekty jsou instance tříd dědících od třídy Movable a tedy i od pygame.sprite.Sprite. Tyto objekty jsou členy seznamu tvořeného třídou pygame.sprite.Group. Tato třída umožňuje vykreslení všech objektů, které jsou do ní přidány. Efekt animace objektů je zajišťován pomocí pravidelné změny obrázků. To je  umožněno díky třídě \textbf{ImageStorage}, změny obrázků probíhají v pravidelných intervalech. Překreslení hracího plánu probíhá v každém tahu, rychlost překreslování je  pevně nastavena na 40 snímků za sekundu. Dále existují pomocné procedury, které jen na určitý čas vykreslí štítek či animaci konce jednoho z hráčů.
+\subsection{Uložení dat}
+Každý z pohybujích se objektů obsahuje veškeré důležité informace o sobě, tedy především souřadnice, směr pohybu, rychlost, případně počet bodů, počet kroků apod. Informace o bludišti jsou uloženy v instanci třídy Maze, která je svázána s třídou Game. Bludiště samotné  je tvořeno dvojrozměrným polem typu char, každý ze znaků má speciální význam, viz. tvorba map. Třída Maze dále obsahuje souřadnice teleportů, souřadnice výchozích míst monster, rozměry bludiště atd. Nastavení hry je uloženo v globálních proměnných.
+\subsection{Detekce kolizí}
+Detekce kolizí umožňuje dědění od třídy Sprite. V okamžiku kolize se rozhodne o odstranění či jiné manipulaci s objektem na základě pravidel hry, viz. uživatelská dokumentace.
+\subsection{Ovládání hráčů}
+Každý pohybující se objekt má svůj směr pohybu daný vektorem rychlosti. Implicitně se pohybuje tímto směrem s tím, že na křižovatkách může dojít ke změně směru. Ovládání jednotlivých hráčů je napevno dáno skupinami kláves. Při zmáčknutí některé klávesy se nejprve uloží  žádaná změna a při dosažení křižovatky se daná změna provede, je-li možná.
+\subsection{Zvuky}
+Přehrávání zvuků umožňuje modul \textit{pygame.mixer}. Každá mapa nastavuje svoji píseň, která je poté dokola přehrávána.
+\pagebreak 
+\section{Monstra}
+\subsection{Vytvoření}
+Monstra se vytváří na pozicích k tomu určených. Každá mapa může obsahovat několik těchto pozic. Ve hře je možno nastavit počet monster připadajících na každého hráče. Při startu hry se vytvoří tolik monster, kolik je určeno tímto počtem, na náhodných pozicích. Monstra se vytváří vždy zaměřená na určitého hráče, na každého jich  připadá stejný počet. Lichá monstra pronásledují, sudá se snaží nadbíhat. Každé z monster má navíc dánu pravděpodobnost s jakou se zachová podle výpočtu nebo náhodně. Tato pravděpodbnost je dána koeficientem úměrným počtu mosnter. Připadají-li tedy na každého hráče tři mosntra, mají pravděpodobnosti náhodného odbočení $\frac{2}{3},\frac{1}{3}$ a 0.
+\subsection{Pohyb}
+Každý pohybující se objekt detekuje příchod na křižovatku jako možnost odbočení v jiném směru. Monstrum se na křižovatce rozhodne o dalším postupu. Nejdříve se pomocí pseudonáhodného čísla rozhodne s pomocí svého koeficientu, zda-li se zachová náhodně. V takovém případě se vydá prvním volným směrem. Jinak zkusí všechny směry a zjistí, kdy bude nejblíže cílové pozici. Ta je daná budťo pozicí cíle, to když monstrum pronásleduje, nebo pozicí 10 kroků ve směru pohybu cíle, pokud monstrum nadbíhá. Potom se otočí nejlepším směrem. Objekt si dále pamatuje souřadnice poslední změny směru, a v případě více než 6 opakování odbočování v okruhu o poloměru menším než 10 (bráno na souřadnice herních polí) se rozhodne náhodně změnit směr. Obrat v chování monstra nastává, je-li hráč v režimu boss. To se monstra naopak snaží dostat co nejdále od daného hráče.
+\section{Průběh prací, závěr}
+Nejdříve jsem vytvořil třídy Game a Maze, jež umožňují práci s bludištěm a jeho vykreslení. Poté jsem přidal pohybující se objekty a pracoval na chování monster. V závěru byly přidány menu, některé efekty.\\
+Pomocí programu \textit{py2exe} jsem vytvořil také spustitelný \textit{exe} soubor pro systém \textit{Windows}. Pod tímto systémem jsou použity jiné fonty, jinak je program totožný. Problém s přenositelností je pouze u soubourů s mapami, respektive s jejich editací, kvůli rozdílným znakům konce řádku na systémech \textit{Windows} a \textit{Linux}.
+\end{document}
